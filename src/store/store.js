@@ -1,5 +1,5 @@
 // import { compose, createStore, applyMiddleware } from 'redux';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 // import { persistStore, persistReducer } from 'redux-persist';
 // import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
@@ -28,7 +28,7 @@ const middleWares = [process.env.NODE_ENV === 'development' && logger].filter(
 // middlewares defaults to redux-thunk in redux-toolkit land
 export const store = configureStore({
   reducer: rootReducer,
-  // middleware: middleWares
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middleWares)
 })
 // export const store = createStore(
 //   persistedReducer,
